@@ -1,6 +1,8 @@
 module server
 
-go 1.20
+go 1.22.0
+
+toolchain go1.23.5
 
 replace github.com/anacrolix/torrent v1.53.3 => github.com/tsynik/torrent v1.2.13
 
@@ -15,7 +17,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/pkg/errors v0.9.1
 	go.etcd.io/bbolt v1.3.8
-	golang.org/x/image v0.16.0
+	golang.org/x/image v0.23.0
 	golang.org/x/time v0.5.0
 )
 
@@ -64,15 +66,15 @@ require (
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/arch v0.7.0 // indirect
-	golang.org/x/crypto v0.23.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
-	golang.org/x/mobile v0.0.0-20240506190922-a1a533f289d3 // indirect
-	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/net v0.25.0 // indirect
-	golang.org/x/sync v0.7.0 // indirect
-	golang.org/x/sys v0.20.0 // indirect
-	golang.org/x/text v0.15.0 // indirect
-	golang.org/x/tools v0.21.0 // indirect
+	golang.org/x/mobile v0.0.0-20250106192035-c31d5b91ecc3 // indirect
+	golang.org/x/mod v0.22.0 // indirect
+	golang.org/x/net v0.34.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/tools v0.29.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
