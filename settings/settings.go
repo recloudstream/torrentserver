@@ -1,7 +1,6 @@
 package settings
 
 import (
-	"os"
 	"path/filepath"
 
 	"server/log"
@@ -19,16 +18,17 @@ var (
 	TorAddr  string
 )
 
-func InitSets(readOnly, searchWA bool) {
+func InitSets(readOnly, searchWA bool) bool {
 	ReadOnly = readOnly
 	SearchWA = searchWA
 	tdb = NewTDB()
 	if tdb == nil {
 		log.TLogln("Error open db:", filepath.Join(Path, "config.db"))
-		os.Exit(1)
+		return false
 	}
 	loadBTSets()
 	Migrate()
+	return true
 }
 
 func CloseDB() {

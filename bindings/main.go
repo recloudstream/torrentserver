@@ -4,8 +4,8 @@ import (
 	server "server"
 )
 
-func StartTorrentServer(pathdb string) {
-	server.Start(pathdb, "", false, false)
+func StartTorrentServer(pathdb string, port int) int {
+	return server.Start(pathdb, port, false, false)
 }
 
 func WaitTorrentServer() {

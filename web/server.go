@@ -3,7 +3,6 @@ package web
 import (
 	"net"
 	"net/http"
-	"os"
 	"sort"
 
 	"github.com/gin-contrib/cors"
@@ -36,7 +35,8 @@ var (
 
 // @externalDocs.description	OpenAPI
 // @externalDocs.url			https://swagger.io/resources/open-api/
-func Start() {
+// returns true iff successful
+func Start() bool {
 	log.TLogln("Start TorrServer " + version.Version + " torrent " + version.GetTorrentVersion())
 	ips := getLocalIps()
 	if len(ips) > 0 {
@@ -45,7 +45,8 @@ func Start() {
 	err := BTS.Connect()
 	if err != nil {
 		log.TLogln("BTS.Connect() error!", err) // waitChan <- err
-		os.Exit(1)                              // return
+		//os.Exit(1)                              // return
+		return false
 	}
 
 	gin.SetMode(gin.ReleaseMode)
@@ -76,6 +77,7 @@ func Start() {
 		httpServer.ListenAndServe()
 		//waitChan <- route.Run(" :" + settings.Port)
 	}()
+	return true
 }
 
 func Wait() error {

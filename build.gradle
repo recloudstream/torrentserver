@@ -1,12 +1,12 @@
 apply plugin: 'maven-publish'
 
-group = 'com.github.diegopyl1209'
+group = 'com.github.recloudstream'
 version = '1.0.0'
 
 publishing {
     publications {
         aar(MavenPublication) {
-            artifactId = 'torrentserver-aniyomi'
+            artifactId = 'torrentserver-cloudstream'
             artifact("./build/$version/torrserver.aar") 
         }
     }

@@ -62,7 +62,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           tag_name: ${{ env.VERSION_TAG }}
-          name: TorrentServer Aniyomi ${{ env.VERSION_TAG }}
+          name: TorrentServer CloudStream ${{ env.VERSION_TAG }}
           body: |
             ---
           files: |

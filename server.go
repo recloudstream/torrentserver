@@ -4,39 +4,48 @@ import (
 	"net"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"server/log"
 	"server/settings"
 	"server/torr/utils"
 	"server/web"
-) 
+)
 
-func Start(pathdb, port string, roSets, searchWA bool) {
+// returns the port of the server or -1 if failed
+// specify port 0 if you want a random port
+func Start(pathdb string, port int, roSets, searchWA bool) int {
 	settings.Path = pathdb
-	settings.InitSets(roSets, searchWA)
+	if !settings.InitSets(roSets, searchWA) {
+		return -1
+	}
 	if roSets {
 		log.TLogln("Enabled Read-only DB mode!")
 	}
 
 	// http checks
-	if port == "" {
-		port = "8090"
-	}
 	log.TLogln("Check web port", port)
-	l, err := net.Listen("tcp", ":"+port)
+
+	l, err := net.Listen("tcp", ":"+strconv.Itoa(port))
 	if l != nil {
 		l.Close()
 	}
 	if err != nil {
 		log.TLogln("Port", port, "already in use! Please set different sslport for HTTP. Abort")
-		os.Exit(1)
+		return -1
+		//os.Exit(1)
 	}
+	realPort := l.Addr().(*net.TCPAddr).Port
 	// remove old disk caches
 	go cleanCache()
 	// set settings http Start web server.
-	settings.Port = port
-	web.Start()
+	settings.Port = strconv.Itoa(realPort)
+	if web.Start() {
+		return realPort
+	} else {
+		return -1
+	}
 }
 
 func cleanCache() {
